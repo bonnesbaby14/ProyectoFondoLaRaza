@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="shortcut icon" href="img/logo.png" />
+  <title>LOGIN</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <style>
+    header.masthead {
+      padding-top: 10rem;
+
+      background: linear-gradient(to bottom,
+          rgba(214, 204, 192, 0.5) 0,
+          rgba(160, 142, 129, 0.8) 100%),
+        url(/img/loginfondo.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-size: cover;
+      height: 100vh;
+      text-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.6);
+    }
+
+    .login input[type="text"] {
+      width: 350px;
+      height: 50px;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-radius: 2px;
+      color: #fff;
+      font-family: "Exo", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 4px;
+    }
+
+    .login input[type="password"] {
+      width: 350px;
+      height: 50px;
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-radius: 2px;
+      color: #fff;
+      font-family: "Exo", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      padding: 4px;
+      margin-top: 10px;
+    }
+
+    .login button {
+      width: 350px;
+      height: 47px;
+      margin-top: 10px;
+
+
+    }
+
+    .login input[type="button"]:hover {
+      opacity: 0.8;
+    }
+
+    .login input[type="button"]:active {
+      opacity: 0.6;
+    }
+
+    .login input[type="text"]:focus {
+      outline: none;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .login input[type="password"]:focus {
+      outline: none;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .login input[type="submit"]:focus {
+      outline: none;
+    }
+
+    ::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    ::-moz-input-placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .textFondo {
+      font-size: 5rem;
+      color: white;
+    }
+
+    @media (max-width: 1000px) {
+      .login {
+        text-align: center;
+        padding-top: 50px;
+      }
+
+      .textFondo {
+        font-size: 3rem;
+        color: white;
+        text-align: center;
+        float: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="masthead" id="header">
+    <div class="container-fluid">
+      <div class="row row align-items-center">
+        <div class="col-md-6 text-center">
+          <div class="float-right textFondo">
+            Fondo<span style="font-weight: 100">LaRaza</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="login">
+            <form action="/login" method="POST">
+              <input type="text" placeholder="Usuario" name="username" id="username"/><br />
+              <input type="password" placeholder="Contraseña" name="password" id="password"/><br />
+              <button type="submit" class="btn btn-light button">Entrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+<!-- Bootstrap core JavaScript -->
+<script src="css/vendor/jquery/jquery.min.js"></script>
+<script src="css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</html>

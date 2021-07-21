@@ -1,0 +1,489 @@
+html{
+   overflow:auto;
+   background-color: #D9D9D9 !important;
+}
+body {
+  width: 100%;
+  height: 100%;
+  color:#fff;
+  background-color: #D9D9D9 !important;
+}
+
+
+.disP{
+   display: block;
+}
+.sinP{
+   padding-top:  2.5rem!important;
+   padding-bottom: 2.5rem!important;
+}
+
+.citytext{
+
+width: 20%;
+float: left; 
+padding-top: 150px;
+}
+
+.cityimg{
+
+   width:80% !important;
+float: right;   
+}
+   
+
+.pestana{
+
+   border: none;
+   display: inline-block;
+   padding: 8px 16px;
+   vertical-align: middle;
+   overflow: hidden;
+   text-decoration: none;
+   background-color: transparent;
+   color:white;
+   text-align: center;
+
+   white-space: nowrap;
+}
+.pestana:hover{
+   background-color: #522E00;
+
+}
+
+
+
+
+
+
+
+
+table, th, td {
+   border: 1px solid white;
+   border-collapse: collapse;
+ }
+ th, td {
+   padding: 5px;
+   text-align: center;
+ }
+
+.textBlog{
+   width:25%;
+    float:left;
+     padding-top: 150px;
+}
+
+.textBlog2{
+   width:75% !important;
+}
+
+.servicios{
+   padding-top: 200px;;
+   width:30% !important; 
+   float:right !important;
+}
+
+.servicios2{
+   width: 70% !important; 
+   float:left !important;
+   
+}
+
+.alturanews{
+   height: 600px!important;
+}
+
+.size17{
+
+   font-size: 17rem;
+   margin-top: 40px;
+}
+.size4{
+
+   font-size: 4rem;
+   margin-top: 10px;
+}
+.size4y{
+
+   font-size: 4rem;
+   margin-top: 10px;
+   margin-left: 20px;
+}
+
+.hrB{
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+   border: 0;
+   border-top-color: currentcolor;
+   border-top-style: none;
+   border-top-width: 0px;
+   border-top: 3px solid rgba(255, 255, 255, 0.9);
+}
+.hrN{
+   margin-top: 1rem;
+  
+   margin-bottom: 1rem;
+   border: 0;
+   border-top-color: currentcolor;
+   border-top-style: none;
+   border-top-width: 0px;
+   border-top: 3px solid rgba(0, 0, 0, 0.9);
+}
+header.masthead h1{
+
+   font-size: 4rem;
+}
+.navbar{
+-webkit-box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+.navbar-toggler{
+   color: white !important;
+}
+
+
+.nav-link{
+color: white !important;
+font-size: 1rem ;
+}
+
+
+header.masthead{
+
+
+    padding-top: 7rem;
+    padding-bottom: calc(10rem - 72px);
+    background: linear-gradient(to bottom,rgba(0,179,223,.8) 0,rgba(216,223,45,.8) 100%),url(/img/cultivo4.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    height: 100vh;
+    text-shadow: .1em .1em .2em rgba(0, 0, 0, 0.6);
+    
+}
+.logotitle{
+   display: none;
+
+}
+
+
+
+
+
+.navcolor{
+background-color:transparent !important;
+}
+
+
+
+.navcolor.scrolled{
+   
+   background-color:#fc9c42 !important;
+
+}
+.logotitle.scrolled2{
+   display:inline-block;
+   font-size: .9rem;
+
+}
+.logoimg.scrolled3{
+   margin-top: 10px;
+   width: 30px;
+   height: 30px;
+
+}
+.container-fluid.colorV{
+   padding-top: 30px;
+   background-color: #D9D9D9;
+
+
+}
+.container-fluid.colorV2{
+   padding-top: 30px;
+   background-color: #D9D9D9;
+
+
+}
+
+
+/* clases noticias (cambiar nombre despues) */
+
+.alturanew{
+
+   height:600px;
+
+}
+.alturauno{
+   height:66.6%;
+}
+.newuno{
+   width:66.6%; 
+   padding:5px;
+}
+.newuno a{
+   position: relative;
+   z-index: 1; 
+   display: block;    
+   height: 100%!important;
+}
+.newdostres{
+   width:33.3%;
+}
+.newdos{
+   height:50%; 
+   width:100%; 
+   padding:5px;
+}
+.newdos a{
+   position: relative;                  
+   z-index: 1;
+   display: block;
+   height: 100%!important;
+}
+
+.newtres{
+   height:50%; 
+   width:100%; 
+   padding:5px; 
+}
+.newtres a{
+   position: relative;
+   z-index: 1;     
+   display: block;    
+   height: 100%!important;
+}
+.newcuatro{
+   height:100%; 
+   width:33.3%; 
+   padding:5px; 
+}
+.newcuatro a{
+   position: relative;
+   z-index: 1;
+   display: block;
+   height: 100%!important;
+}
+.newcinco{
+   height:100%; 
+   width:33.3%; 
+   padding:5px; 
+}
+.newcinco a{
+   position: relative;
+   z-index: 1;
+   display: block;
+   height: 100%!important;
+}
+.newseis{
+   height:100%; 
+   width:33.3%; 
+   padding:5px; 
+}
+.cuerpo{
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   z-index: 1; 
+   padding:20px;
+   color:white;
+}
+.cuerpo h3{
+   font-size:1rem;
+}
+.cuerpo #main{
+   font-size:2rem;
+}
+.newseis a{
+   position: relative;
+   z-index: 1;
+   display: block;
+   height: 100%!important;
+}
+
+.alturados{
+   height:33.3%; 
+}
+.alturaservicios{
+
+   height:500px;
+}
+
+/* fin clases noticias */
+
+
+
+
+
+
+@media (max-width: 1000px){
+
+   .disP{
+      display: none;
+   }
+
+   .sinP{
+      padding-top:  .8rem!important;
+      padding-bottom: .5rem!important;
+   }
+   .sinP h1{
+      font-size: 100px;;
+   }
+
+   .cuerpo{
+      background: rgba(0,0,0,.7);
+   }
+   .cuerpo #main{
+      font-size:1rem;
+   }
+
+/* clases noticias (cambiar nombre despues) */
+.alturanew{
+
+   height: auto;
+   
+
+}
+.textBlog{
+   width:100%; float:left; padding-top: 15px;
+}
+
+.textBlog2{
+   width:100% !important;
+}
+.citytext{
+
+   width: 100%;
+   float: left; 
+   padding-top: 15px;
+   }
+   .citytext h2{
+      font-size:1.6rem!important;
+   }
+   
+   .cityimg{
+   
+      width:100% !important;
+      padding-top: 5px !important;
+   
+   }
+      .pestana{
+         font-size: .5rem;
+      }
+ 
+.margincity{
+   margin-top: 160px;
+   padding-left: 15px;
+   padding-right: 15px;
+}
+
+.servicios{
+   padding-top: 0px;;
+   width:100% !important; 
+   
+}
+
+.servicios2{
+   width: 100% !important; 
+   height:550px !important;
+   
+}
+
+.newuno{
+   height:300px;
+   width: 100%;
+   padding:10px;
+}
+.newdostres{
+   width:100%;
+}
+.newdos{
+   height:300px;
+   width:100%; 
+   padding:10px;
+}
+
+.newtres{
+   height:300px;
+   width:100%; 
+   padding:10px; 
+}
+.newcuatro{
+   height:300px;
+   width:100%; 
+   padding:10px; 
+}
+.newcinco{
+   height:300px; 
+   width:100%; 
+   padding:10px; 
+}
+.newseis{
+   height:300px; 
+   width:100%; 
+   padding:10px; 
+}
+
+.alturados{
+   height:100%; 
+  
+}
+
+
+/* fin clases noticias */
+
+
+
+
+
+
+   .navcolor{
+      background-color:#fc9c42 !important;
+      
+   
+   }
+   .size17{
+
+      font-size: 7rem;
+      margin-top: 10px;
+   }
+   .size4{
+      
+      font-size: 4rem;
+      margin-top: 20px;
+   }
+   .size4y{
+   
+      font-size: 4rem;
+      margin-top: 5px;
+      margin-left: 10px;
+   }
+
+   header.masthead h1{
+      margin-top: 10px;
+      text-align: center;
+      font-size: 2rem;
+   }
+
+
+body,html {
+
+  overflow-x:hidden !important;
+ 
+}
+header.masthead{
+   
+    padding-top: 6rem;
+    padding-bottom: calc(10rem - 72px);
+    background: linear-gradient(to bottom,rgba(0,179,223,.8) 0,rgba(216,223,45,.8) 100%),url(/img/cultivo4.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    height: 100vh !important;
+}
+
+
+}
+

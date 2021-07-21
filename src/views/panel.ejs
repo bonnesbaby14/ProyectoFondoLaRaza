@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel: Fondo La Raza</title>
+    <link rel="shortcut icon" href="img/logo.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <style>
+        /*Profile Card 3*/
+        .profile-card-3 {
+            font-family: 'Open Sans', Arial, sans-serif;
+            position: relative;
+            float: left;
+            overflow: hidden;
+            width: 100%;
+            text-align: center;
+            height: 368px;
+            border: none;
+        }
+
+        .profile-card-3 .background-block {
+            float: left;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .profile-card-3 .background-block .background {
+            width: 100%;
+            vertical-align: top;
+            opacity: 0.9;
+            -webkit-filter: blur(0.5px);
+            filter: blur(0.5px);
+            -webkit-transform: scale(1.8);
+            transform: scale(2.8);
+        }
+
+        .profile-card-3 .card-content {
+            width: 100%;
+            padding: 15px 25px;
+            color: #232323;
+            float: left;
+            background: #efefef;
+            height: 50%;
+            border-radius: 0 0 5px 5px;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .profile-card-3 .card-content::before {
+            content: '';
+            background: #efefef;
+            width: 120%;
+            height: 100%;
+            left: 11px;
+            bottom: 51px;
+            position: absolute;
+            z-index: -1;
+            transform: rotate(-13deg);
+        }
+
+        .profile-card-3 .profile {
+            border-radius: 50%;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            max-width: 100px;
+            opacity: 1;
+            box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 1);
+            -webkit-transform: translate(-50%, 0%);
+            transform: translate(-50%, 0%);
+            z-index: 99999;
+        }
+
+        .profile-card-3 h2 {
+            margin: 0 0 5px;
+            font-weight: 600;
+            font-size: 25px;
+        }
+
+        .profile-card-3 h2 small {
+            display: block;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .profile-card-3 i {
+            display: inline-block;
+            font-size: 16px;
+            color: #232323;
+            text-align: center;
+            border: 1px solid #232323;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+
+        .profile-card-3 .icon-block {
+            float: left;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .profile-card-3 .icon-block a {
+            text-decoration: none;
+        }
+
+        .profile-card-3 i:hover {
+            background-color: #232323;
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            Fondo La RAZA
+        </a>
+        <span>Bienvenido: <%=user.nombre %> </span>
+        <a href="/logOut"> <i class="fas fa-sign-out-alt" style="font-size: 3rem; color:grey;"></i></a>
+    </nav>
+    <div class="container" style="padding-top: 10px;">
+
+
+
+        <!-- cabecera  -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <p class="display-4">Tipo de usuario: <%if(user.tipo==0){%>Master<% }else{ %> Sucursal<%}%>  </p>
+               <p class="display-4">Sucursal: <%if(user.tipo==0){ %> N/A <%  }else if(user.sucursal==0){%> Cuquio
+                    <% }else if(user.sucursal==1){ %>
+                    Tepatitlan de Morelos <%}else if(user.sucursal==2){ %> Ameca <%}else if(user.sucursal==3){ %>
+                    Guadalajara <%} else if(user.sucursal==4){ %> Autlán <%}%>   
+               </p>
+            </div>
+         </div>
+
+
+         <!-- fin de la cabecera -->
+
+
+         <% if(user.tipo==0){ %>
+                    <!-- modal agrgar usuarios -->
+                <div class="modal fade" id="formUser" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Nueva Usuario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="ss">Usuario</label>
+                                    <input type="text" class="form-control" id="usuario" aria-describedby="user"
+                                        name="user">
+                                    <div id="feedbacktitulo" class="invalid-feedback">
+                                        Porfavor digita un usuario.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" aria-describedby="TituloNoticia"
+                                        name="nombre">
+                                    <div id="feedbacktitulo" class="invalid-feedback">
+                                        Porfavor digita un nombre.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasena1"
+                                        aria-describedby="TituloNoticia" name="">
+                                    <div id="feedbacktitulo" class="invalid-feedback">
+                                        Porfavor digita una contraseña.
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Repita Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasena2"
+                                        aria-describedby="TituloNoticia" name="">
+                                    <div id="feedbacktitulo" class="invalid-feedback">
+                                        Las contraseñas no coinciden.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Tipo Usuario: </label>
+
+                                    <div class="form-check form-check-inline pl-3 pt-3">
+                                        <input class="form-check-input" type="radio" name="tipoUsuario" id="BMaster"
+                                            checked value="0">
+                                        <label class="form-check-label" for="inlineRadio1">Master</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tipoUsuario" id="BSucursal"
+                                            value="1">
+                                        <label class="form-check-label" for="inlineRadio2">Sucursal</label>
+                                    </div>
+
+                                </div>
+                                <!-- ooooo -->
+                                <div id="selectSucursal">
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" onclick="upUser()" class="btn btn-primary">Registrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- din del modal de agregar usuarios -->
+                <!-- modal de todas las usuarios -->
+                <div class="modal fade " id="viewUSers" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Usuarios</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col">Sucursal</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if(usuarios!=null){  %>
+                                        <% console.log(usuarios); %>
+                                        <% for(var i=0; i<usuarios.length; i++){ %>
+                                        <tr>
+                                            <th style="width:5%" scope="row"><%=i+1  %> </th>
+                                            <td style="width: 20%"><%=usuarios[i].usuario %> </td>
+                                            <td style="width: 40%"><%=usuarios[i].nombre %> </td>
+                                            <td style="width: 10%">
+                                                <%if(usuarios[i].tipo==0){%>Master<%  }else{%>Sucursal<%}  %> </td>
+                                            <td style="width: 20%">
+                                                <%if(usuarios[i].tipo==0){%>N/A<%  }else if(usuarios[i].sucursal==0){%>
+                                                Cuquio
+                                                <% }else if(usuarios[i].sucursal==1){ %>
+                                                Tepatitlan de Morelos <%}else if(usuarios[i].sucursal==2){ %> Ameca
+                                                <%}else if(usuarios[i].sucursal==3){ %>
+                                                Guadalajara <%} else if(usuarios[i].sucursal==4){ %> Autlán <%}%>   </td>
+                                            <td style="width: 5%">
+                                                <div >
+                                                    <input type="hidden" name="iduser" id="iduser"
+                                                        value="<%=usuarios[i].id%>" aria-describedby="Id usuario">
+                                                <%if(usuarios[i].id==1||usuarios[i].id==user.id){%> <% }else{ %>
+                                                <button type="button" onclick="deleteUser(<%=usuarios[i].id%>)"
+                                                    class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                <% } %>
+                            </div>
+                            </td>
+                            </tr>
+                            <% } %>
+                            <%  } %>
+                            </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal de todas las usuarios -->
+            <!-- tarjeta de de usuarios -->
+            <div class="card mb-3" style="box-shadow: 2px 2px 5px #999;">
+                <div class="row no-gutters">
+                    <div class="col-md-4"
+                        style=" background: linear-gradient(to bottom,rgba(242,175,92,.1) 0,rgba(166,107,56,.1) 100%),url(/img/cultivo.jpg);">
+                        <i class="fas fa-user-friends"
+                            style="font-size: 9rem; text-align: center; color:white; display: flex; justify-content: center; "></i>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Usuarios</h5>
+                            <% if(usuarios!=null){ %>
+                            <p class="card-text">Usuarios registrados: <%=usuarios.length %></p>
+                            <% }else { %>
+                            <p class="card-text">Usuarios registrados: No disponible </p>
+                            <% } %>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#formUser">Publicar </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#viewUSers">Ver
+                                Todo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin de tarjetas de usuarios -->
+
+            <% } %>
+
+
+
+
+
+
+
+
+            <% if(user.tipo==0){ %>
+            <!-- modal agrgar noticias -->
+            <div class="modal fade" id="formNew" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Nueva Noticia</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Titulo</label>
+                                <input type="text" class="form-control" id="titleNew" aria-describedby="TituloNoticia"
+                                    name="titleNew">
+                                <div id="feedbacktitulo" class="invalid-feedback">
+                                    Porfavor digita el titulo de la noticia.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Cuerpo de Noticia</label>
+                                <textarea class="form-control" id="bodyNew" rows="3" name="bodyNew"></textarea>
+                                <div id="feedbacktitulo" class="invalid-feedback">
+                                    Porfavor digita el cuerpo de la noticia.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">URL Noticia</label>
+                                <input type="text" class="form-control" id="urlNew" aria-describedby="URLNoticia"
+                                    name="urlNew">
+                                <div id="feedbacktitulo" class="invalid-feedback">
+                                    Porfavor digita el URL de la noticia.
+                                </div>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" accept=".jpg" class="custom-file-input" id="customFile" name="file">
+                                <div id="feedbacktitulo" class="invalid-feedback">
+                                    Porfavor carga una imagen.
+                                </div>
+                                <label class="custom-file-label" for="customFile">Imagen </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="upNew()" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- din del modal de agregar noticias -->
+            <!-- modal de todas las noticias -->
+            <div class="modal fade " id="viewNew" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Noticias</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Cuerpo</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(noticias!=null){  %>
+                                    <% for(var i=0; i<noticias.length; i++){ %>
+                                    <tr>
+                                        <th style="width:5%" scope="row"><%=i+1  %> </th>
+                                        <td style="width: 20%"><%=noticias[i].titulo %> </td>
+                                        <td style="width: 40%"><%=noticias[i].cuerpo %> </td>
+                                        <td style="width: 10%"><%=noticias[i].fecha %> </td>
+                                        <td style="width: 20%"><img src="<%=noticias[i].imagen%> "
+                                                style="height: 100px; width: 90%;">
+                                        </td>
+                                        <td style="width: 5%">
+                                            <form action="/deleteNew" method="POST">
+                                                <input type="hidden" name="idNew" id="idNew" value="<%=noticias[i].id%>"
+                                                    aria-describedby="Id noticia">
+                                                <button type="button" onclick="deleteNew(<%=noticias[i].id%>)"
+                                                    class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    <%  } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal de todas las noticias -->
+            <!-- tarjeta de de noticias -->
+            <div class="card mb-3" style="box-shadow: 2px 2px 5px #999;">
+                <div class="row no-gutters">
+                    <div class="col-md-4"
+                        style=" background: linear-gradient(to bottom,rgba(242,175,92,.1) 0,rgba(166,107,56,.1) 100%),url(/img/cultivo.jpg);">
+                        <i class="fas fa-newspaper"
+                            style="font-size: 9rem; text-align: center; color:white; display: flex; justify-content: center; "></i>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Noticias</h5>
+                            <% if(noticias!=null){ %>
+                            <p class="card-text">Noticias Publicadas: <%=noticias.length %></p>
+                            <% }else { %>
+                            <p class="card-text">Noticias Publicadas: No disponible </p>
+                            <% } %>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#formNew">Publicar </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#viewNew">Ver
+                                Todo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin de tarjetas de noticias -->
+            <% } %>
+
+
+
+            <% if(user.tipo==0){ %>
+            <!-- modal para repsonder una pregunta -->
+            <div class="modal fade" id="formRes" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form class="modal-content" action='/updateBlog' method="POST" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Responder Pregunta</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="idpregunta" name="idpregunta" value="">
+                            <input type="hidden" id="remitente" name="remitente" value="">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Pregunta</label>
+                                <input type="text" class="form-control" id="pregunta" disabled="disabled"
+                                    aria-describedby="PeguntaCliente" name="PeguntaCliente">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Respuesta</label>
+                                <textarea class="form-control" id="BlogRespuesta" rows="3"
+                                    name="BlogRespuesta"></textarea>
+                                <div id="feedbacktitulo" class="invalid-feedback">
+                                    Porfavor digita la respuesta.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="upRespuesta()" class="btn btn-primary">Responder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- fin del modal para responder una pregunta -->
+            <!-- modal preguntas sin responder -->
+            <div class="modal fade " id="formBlog" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Preguntas sn responder</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Pregunta</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% var contador=0; %>
+                                    <% if(preguntas!=null){  %>
+                                    <% for(var i=0; i<preguntas.length; i++){ %>
+                                    <% if(preguntas[i].respuesta==null) { %>
+                                    <% contador++; %>
+                                    <tr>
+                                        <th scope="row"><%=i+1  %> </th>
+                                        <td><%=preguntas[i].remitente %> </td>
+                                        <td><%=preguntas[i].pregunta %> </td>
+                                        <td>
+                                            <div class="row">
+                                                <button id="modalResponde" type="button" class="btn btn-warning"
+                                                    data-dismiss="modal"
+                                                    onclick="modalReponde(<%=preguntas[i].id%>,'<%=preguntas[i].pregunta.replace(/(\r\n|\n|\r)/gm, ' ');%>','<%=preguntas[i].remitente%>,')">Responder</button>
+                                                <div>
+
+                                                    <button type="button" onclick="deleteBlog(<%=preguntas[i].id%>)"
+                                                        class="btn btn-danger"
+                                                        style="margin-left: 5px;">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    <% } %>
+                                    <%  } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal de preguntas sin repsonder -->
+            <!-- modal de todas las preguntas -->
+            <div class="modal fade " id="viewABlog" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Todas las Preguntas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Pregunta</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Respuesta</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(preguntas!=null){  %>
+                                    <% for(var i=0; i<preguntas.length; i++){ %>
+                                    <tr>
+                                        <th style="width:4%" scope="row"><%=i+1  %> </th>
+                                        <td style="width: 28%"><%=preguntas[i].pregunta %> </td>
+                                        <td style="width: 25%"><%=preguntas[i].remitente %> </td>
+                                        <td style="width: 10%"><%=preguntas[i].fecha %> </td>
+                                        <td style="width: 28%"><%=preguntas[i].respuesta%> </td>
+                                        <td style="width: 5%">
+                                            <div>
+                                                <input type="hidden" name="idBlog" id="idblog"
+                                                    value="<%=preguntas[i].id%>" aria-describedby="Id pregunta">
+                                                <button type="button" onclick="deleteBlog(<%=preguntas[i].id%>)"
+                                                    class="btn btn-danger" style="margin-left: 5px;">Eliminar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    <%  } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal de todas las preguntas -->
+            <!-- tarjeta de blog -->
+            <div class="card mb-3" style="box-shadow: 2px 2px 5px #999;">
+                <div class="row no-gutters">
+                    <div class="col-md-4"
+                        style=" background: linear-gradient(to bottom,rgba(242,175,92,.1) 0,rgba(166,107,56,.1) 100%),url(/img/cultivo.jpg);">
+                        <i class="fas fa-comments"
+                            style="font-size: 9rem; text-align: center; color:white; display: flex; justify-content: center; "></i>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Blog</h5>
+                            <p class="card-text">Preguntas sin atender: <%=contador;  %> </p>
+                            <button type="button" data-toggle="modal" data-target="#formBlog"
+                                class="btn btn-primary">Responder Pendientes </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#viewABlog">Ver
+                                Todo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin de tarjeta de blog -->
+            <% } %>
+
+
+
+
+            <!-- modal para agregar multimedia -->
+            <div class="modal fade" id="formGalery" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form class="modal-content" action='/UpNoticia' method="POST" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Nueva Contenido</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Tipo de contenido: </label>
+
+                                <div class="form-check form-check-inline pl-3 pt-3">
+                                    <input class="form-check-input" type="radio" name="tipoMedia" id="Bvideo" value="0">
+                                    <label class="form-check-label" for="inlineRadio1">Video</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tipoMedia" id="Bimagen"
+                                        value="1">
+                                    <label class="form-check-label" for="inlineRadio2">Imagen</label>
+                                </div>
+
+                            </div>
+
+                            <div id="dataMedia">
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" onclick="upMedia()" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- din del modal de agregar galeria -->
+
+            <!-- modal para ver la multimedia -->
+            <div class="modal fade " id="modalMultimedia" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Multimedia.</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <select id="selectView" class="form-control form-control-sm">
+                                <option value="5">Todas las sucursales</option>
+                                <option value="0">Cuquio</option>
+                                <option value="1">Tepatitlán de Morelos</option>
+                                <option value="2">Ameca</option>
+                                <option value="3">Guadalajara</option>
+                                <option value="4">Autlán</option>
+                            </select>
+                            <table id="latabla" class="table table-hover">
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin del modal para ver multimedia  -->
+            <!-- tarjeta de multimedia -->
+            <div class="card mb-3" style="box-shadow: 2px 2px 5px #999;">
+                <div class="row no-gutters">
+                    <div class="col-md-4"
+                        style=" background: linear-gradient(to bottom,rgba(242,175,92,.1) 0,rgba(166,107,56,.1) 100%),url(/img/cultivo.jpg);">
+                        <i class="fas fa-photo-video "
+                            style="padding-top:10px;  font-size: 8rem; text-align: center; color:white; display: flex; justify-content: center; "></i>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Multimedia:
+                                <%if(user.tipo==0){%>N/A<%  }else if(user.sucursal==0){%> Cuquio
+                                <% }else if(user.sucursal==1){ %>
+                                Tepatitlan de Morelos <%}else if(user.sucursal==2){ %> Ameca
+                                <%}else if(user.sucursal==3){ %>
+                                Guadalajara <%} else if(user.sucursal==4){ %> Autlán <%}%>   
+                     </h5>
+                     <p class="card-text">Contenido disponible</p>
+                     <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#formGalery">Publicar </button>
+                     <button type="button" id="multimedia" class="btn btn-secondary">Ver Todo</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- fin de la tarjeta de multimedia -->
+
+
+         <% if(user.tipo==0){ %>
+                                <!-- modal agrgar servicios -->
+                                <div class="modal fade" id="formService" data-backdrop="static" data-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content" enctype="multipart/form-data">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Nuevo Servicio </h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Servicio</label>
+                                                    <div id="editor">
+
+                                                    </div>
+                                                    <div id="feedbacktitulo" class="invalid-feedback">
+                                                        Porfavor digita el servicio de la noticia.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancelar</button>
+                                                <button type="button" onclick="upService()"
+                                                    class="btn btn-primary">Publicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- din del modal de agregar servicios -->
+                                <!-- modal de todas las servicios -->
+                                <div class="modal fade " id="viewService" data-backdrop="static" data-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Noticias</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ID</th>
+                                                            <th scope="col">Servicio</th>
+
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <% if(noticias!=null){  %>
+                                                        <% for(var i=0; i<servicios.length; i++){ %>
+                                                        <tr>
+                                                            <th style="width:5%" scope="row"><%=i+1  %> </th>
+                                                            <td style="width: 90%">
+                                                                <div><%-servicios[i].servicio %></div>
+                                                            </td>
+
+
+
+                                                            <td style="width: 5%">
+                                                                <form action="/deleteNew" method="POST">
+                                                                    <input type="hidden" name="idNew" id="idNew"
+                                                                        value="<%=servicios[i].id%>"
+                                                                        aria-describedby="Id noticia">
+                                                                    <button type="button"
+                                                                        onclick="deleteService(<%=servicios[i].id%>)"
+                                                                        class="btn btn-danger"><i
+                                                                            class="fas fa-trash"></i></button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                        <%  } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary"
+                                                    data-dismiss="modal">Aceptar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- modal de todas las servicios -->
+                                <!-- tarjeta de de servicios -->
+                                <div class="card mb-3" style="box-shadow: 2px 2px 5px #999;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4"
+                                            style=" background: linear-gradient(to bottom,rgba(242,175,92,.1) 0,rgba(166,107,56,.1) 100%),url(/img/cultivo.jpg);">
+                                            <i class="fas fa-money-check"
+                                                style="font-size: 9rem; text-align: center; color:white; display: flex; justify-content: center; "></i>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Servicios</h5>
+                                                <% if(noticias!=null){ %>
+                                                <p class="card-text">Servicios Publicados: <%=servicios.length %></p>
+                                                <% }else { %>
+                                                <p class="card-text">Noticias Publicados: No disponible </p>
+                                                <% } %>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#formService">Publicar </button>
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#viewService">Ver
+                                                    Todo</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- fin de tarjetas de servicios -->
+                                <% } %>
+
+                        </div>
+                        <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+         crossorigin="anonymous"></script> -->
+                        <script src="https://code.jquery.com/jquery-3.5.1.js"
+                            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+                            crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                            crossorigin="anonymous"></script>
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                            crossorigin="anonymous"></script>
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+                        <script>
+
+
+                            function deleteBlog(id) {
+                                var formData = new FormData();
+
+                                formData.append('idBlog', id);
+                                swal({
+                                    title: "Eliminar Pregunta?",
+                                    text: "¿Seguro que quieres eliminar esta pregunta?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+
+                                            $.ajax({
+                                                contentType: "application/json; charset=utf-8",
+                                                dataType: "json",
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                method: "POST",
+                                                url: "/deleteBlog",
+                                                data: formData,
+                                                success: (res) => {
+                                                    if (res.estado == "true") {
+                                                        $("#viewUSers").modal('hide');;
+                                                        swal("Listo", "Pregunta eliminada", "success").then(() => {
+                                                            location.reload(true);
+                                                        });
+                                                    } else {
+                                                        $("#viewUSers").modal('hide');
+                                                        swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                            location.reload(true);
+                                                        });;
+                                                    }
+
+                                                },
+                                            });
+
+
+
+
+                                        } else {
+
+                                        }
+                                    });
+
+
+                            }
+
+
+
+                            function deleteMedia(id) {
+                                var formData = new FormData();
+
+                                formData.append('idMedia', id);
+                                swal({
+                                    title: "Eliminar Contenido?",
+                                    text: "¿Seguro que quieres eliminar este elemento?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+
+                                            $.ajax({
+                                                contentType: "application/json; charset=utf-8",
+                                                dataType: "json",
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                method: "POST",
+                                                url: "/deleteMedia",
+                                                data: formData,
+                                                success: (res) => {
+                                                    if (res.estado == "true") {
+                                                        $("#viewUSers").modal('hide');;
+                                                        swal("Listo", "Elemento eliminado", "success").then(() => {
+                                                            location.reload(true);
+                                                        });
+                                                    } else {
+                                                        $("#viewUSers").modal('hide');
+                                                        swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                            location.reload(true);
+                                                        });;
+                                                    }
+
+                                                },
+                                            });
+
+
+
+
+                                        } else {
+
+                                        }
+                                    });
+
+
+                            }
+
+
+                            function deleteNew(id) {
+                                var formData = new FormData();
+
+                                formData.append('idNew', id);
+                                swal({
+                                    title: "Eliminar Noticia?",
+                                    text: "¿Seguro que quieres eliminar esta noticia?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+
+                                            $.ajax({
+                                                contentType: "application/json; charset=utf-8",
+                                                dataType: "json",
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                method: "POST",
+                                                url: "/deleteNew",
+                                                data: formData,
+                                                success: (res) => {
+                                                    if (res.estado == "true") {
+                                                        $("#viewUSers").modal('hide');;
+                                                        swal("Listo", "Noticia eliminada", "success").then(() => {
+                                                            location.reload(true);
+                                                        });
+                                                    } else {
+                                                        $("#viewUSers").modal('hide');
+                                                        swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                            location.reload(true);
+                                                        });;
+                                                    }
+
+                                                },
+                                            });
+
+
+
+
+                                        } else {
+
+                                        }
+                                    });
+
+
+                            }
+                            function deleteService(id) {
+                                var formData = new FormData();
+
+                                formData.append('idService', id);
+                                swal({
+                                    title: "Eliminar Servicio?",
+                                    text: "¿Seguro que quieres eliminar este servicio?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+
+                                            $.ajax({
+                                                contentType: "application/json; charset=utf-8",
+                                                dataType: "json",
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                method: "POST",
+                                                url: "/deleteService",
+                                                data: formData,
+                                                success: (res) => {
+                                                    if (res.estado == "true") {
+                                                        $("#formService").modal('hide');;
+                                                        swal("Listo", "Servicio  eliminado", "success").then(() => {
+                                                            location.reload(true);
+                                                        });
+                                                    } else {
+                                                        $("#formService").modal('hide');
+                                                        swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                            location.reload(true);
+                                                        });;
+                                                    }
+
+                                                },
+                                            });
+
+
+
+
+                                        } else {
+
+                                        }
+                                    });
+
+
+                            }
+
+
+
+
+                            function deleteUser(id) {
+                                var formData = new FormData();
+
+                                formData.append('idUser', id);
+                                swal({
+                                    title: "Eliminar Usuario?",
+                                    text: "¿Seguro que quieres eliminar este usuario?",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                        if (willDelete) {
+
+                                            $.ajax({
+                                                contentType: "application/json; charset=utf-8",
+                                                dataType: "json",
+                                                cache: false,
+                                                contentType: false,
+                                                processData: false,
+                                                method: "POST",
+                                                url: "/deleteUser",
+                                                data: formData,
+                                                success: (res) => {
+                                                    if (res.estado == "true") {
+                                                        $("#viewUSers").modal('hide');;
+                                                        swal("Listo", "Usuario eliminado", "success").then(() => {
+                                                            location.reload(true);
+                                                        });
+                                                    } else {
+                                                        $("#viewUSers").modal('hide');
+                                                        swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                            location.reload(true);
+                                                        });;
+                                                    }
+
+                                                },
+                                            });
+
+
+
+
+                                        } else {
+
+                                        }
+                                    });
+
+
+                            }
+                            // upppp
+                            function upUser() {
+                                if ($("#usuario").val().length > 0) {
+                                    $('#usuario').addClass('is-valid');
+                                    $('#usuario').removeClass('is-invalid')
+
+                                } else {
+                                    $('#usuario').addClass('is-invalid')
+                                    return;
+                                }
+                                if ($("#nombre").val().length > 0) {
+                                    $('#nombre').addClass('is-valid');
+                                    $('#nombre').removeClass('is-invalid')
+
+                                } else {
+                                    $('#nombre').addClass('is-invalid')
+                                    return;
+                                }
+                                if ($("#contrasena1").val().length > 0) {
+                                    $('#contrasena1').addClass('is-valid');
+                                    $('#contrasena1').removeClass('is-invalid')
+
+                                } else {
+                                    $('#contrasena1').addClass('is-invalid')
+                                    return;
+                                }
+                                if ($("#contrasena2").val() == $("#contrasena1").val()) {
+                                    $('#contrasena2').addClass('is-valid');
+                                    $('#contrasena2').removeClass('is-invalid')
+
+                                } else {
+                                    $('#contrasena2').addClass('is-invalid')
+                                    return;
+                                }
+                                var formData = new FormData();
+
+                                formData.append('usuario', $("#usuario").val());
+                                formData.append('nombre', $("#nombre").val());
+                                formData.append('contrasena', $("#contrasena1").val());
+                                formData.append('tipo', $("input[name='tipoUsuario']:checked").val());
+
+                                if ($("input[name='tipoUsuario']:checked").val() == 0) {
+                                    $.ajax({
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        method: "POST",
+                                        url: "/upUser",
+                                        data: formData,
+                                        success: (res) => {
+                                            console.log(res);
+                                            if (res.estado == "true") {
+                                                $("#formUser").modal('hide');;
+                                                swal("Listo", "Usuario registrado", "success").then(() => {
+                                                    location.reload(true);
+                                                });
+                                            } else {
+                                                $("#formUser").modal('hide');
+                                                swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            }
+
+                                        },
+                                    });
+
+                                } else {
+
+                                    formData.append('sucursal', $("#sucursalUser").val());
+                                    $.ajax({
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        method: "POST",
+                                        url: "/upUser",
+                                        data: formData,
+                                        success: (res) => {
+                                            if (res.estado == "true") {
+                                                $("#formRes").modal('hide');;
+                                                swal("Listo", "Respuesta registrada", "success").then(() => {
+                                                    location.reload(true);
+                                                });
+                                            } else {
+                                                $("#formRes").modal('hide');
+                                                swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            }
+
+                                        },
+                                    });
+
+
+                                }
+                            }
+
+                            $("input[name='tipoUsuario']").change(function () {
+                                if ($("input[name='tipoUsuario']:checked").val() == 0) {
+                                    // master
+
+
+                                    $('#selectSucursal').html(``);
+
+
+                                } else {
+                                    //sucursal
+                                    $('#selectSucursal').html(`
+                
+                <label for="exampleInputEmail1">Sucursal: </label>
+                                <select name="sucursalUser" id="sucursalUser" class="form-control form-control-sm">
+                        
+                                    <option value="0">Cuquio</option>
+                                    <option value="1">Tepatitlán de Morelos</option>
+                                    <option value="2">Ameca</option>
+                                    <option value="3">Guadalajara</option>
+                                    <option value="4">Autlán</option>
+                                </select>
+                `);
+
+                                }
+
+                            });
+
+
+
+
+                        </script>
+
+                        <script>
+                            function upRespuesta() {
+
+                                if ($("#BlogRespuesta").val().length > 0) {
+                                    $('#BlogRespuesta').addClass('is-valid');
+                                    $('#BlogRespuesta').removeClass('is-invalid')
+
+                                } else {
+                                    $('#BlogRespuesta').addClass('is-invalid')
+                                    return;
+                                }
+                                var formData = new FormData();
+
+                                formData.append('idpregunta', $("#idpregunta").val());
+                                formData.append('BlogRespuesta', $("#BlogRespuesta").val());
+                                formData.append('remitente', $("#remitente").val());
+                                $.ajax({
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    method: "POST",
+                                    url: "/updateBlog",
+                                    data: formData,
+                                    success: (res) => {
+                                        console.log(res);
+                                        if (res.estado == "true") {
+                                            $("#formRes").modal('hide');;
+                                            swal("Listo", "Respues registrada", "success").then(() => {
+                                                location.reload(true);
+                                            });
+                                        } else {
+                                            $("#formRes").modal('hide');
+                                            swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                location.reload(true);
+                                            });;
+                                        }
+
+                                    },
+                                });
+                            }
+                        </script>
+                        <script>
+                            function upNew() {
+
+                                if ($("#titleNew").val().length > 0) {
+                                    $('#titleNew').addClass('is-valid');
+                                    $('#titleNew').removeClass('is-invalid')
+
+                                } else {
+                                    $('#titleNew').addClass('is-invalid')
+                                    return;
+                                }
+
+                                if ($("#bodyNew").val().length > 0) {
+                                    $('#bodyNew').addClass('is-valid');
+                                    $('#bodyNew').removeClass('is-invalid')
+
+                                } else {
+                                    $('#bodyNew').addClass('is-invalid')
+                                    return;
+                                }
+
+                                if ($("#urlNew").val().length > 0) {
+                                    $('#urlNew').addClass('is-valid');
+                                    $('#urlNew').removeClass('is-invalid')
+
+                                } else {
+                                    $('#urlNew').addClass('is-invalid')
+                                    return;
+                                }
+                                if ($('#customFile')[0].files.length > 0) {
+
+                                    $('#customFile').addClass('is-valid');
+                                    $('#customFile').removeClass('is-invalid')
+
+                                } else {
+                                    $('#customFile').addClass('is-invalid')
+                                    return;
+                                }
+
+                                var formData = new FormData();
+                                var files = $('#customFile')[0].files[0];
+                                formData.append('file', files, "img");
+                                formData.append('titleNew', $("#titleNew").val());
+                                formData.append('urlNew', $("#urlNew").val());
+                                formData.append('bodyNew', $("#bodyNew").val());
+
+
+
+                                $.ajax({
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    method: "POST",
+                                    url: "/upNoticia",
+                                    data: formData,
+                                    success: (res) => {
+                                        if (res.estado == "true") {
+                                            $("#formNew").modal('hide');;
+                                            swal("Listo", "Noticia registrada", "success").then(() => {
+                                                location.reload(true);
+                                            });;
+                                        } else {
+                                            $("#formNew").modal('hide');
+                                            swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                location.reload(true);
+                                            });;
+                                        }
+
+                                    },
+                                });
+
+
+                            }
+
+                            function upMedia() {
+                                
+                <%if (user.tipo == 0) { %>
+                
+                                var sucursal = $("#sucursalMedia").val();
+                                <% } else {%>
+                                var sucursal = <%=user.sucursal%>;
+                                <% }%>
+
+
+                                if ($("input[name='tipoMedia']:checked").val() == 0) {
+                                    if ($("#tituloVideo").val().length > 0) {
+                                        $('#tituloVideo').addClass('is-valid');
+                                        $('#tituloVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#tituloVideo').addClass('is-invalid')
+                                        return;
+                                    }
+
+                                    if ($("#urlVideo").val().length > 0) {
+                                        $('#urlVideo').addClass('is-valid');
+                                        $('#urlVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#urlVideo').addClass('is-invalid')
+                                        return;
+                                    }
+
+                                    if ($("#urlVideo").val().length > 0) {
+                                        $('#urlVideo').addClass('is-valid');
+                                        $('#urlVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#urlVideo').addClass('is-invalid')
+                                        return;
+                                    }
+                                    if ($('#imgVideo')[0].files.length > 0) {
+
+                                        $('#imgVideo').addClass('is-valid');
+                                        $('#imgVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#imgVideo').addClass('is-invalid')
+                                        return;
+                                    }
+
+                                    var formData = new FormData();
+                                    var files = $('#imgVideo')[0].files[0];
+                                    formData.append('file', files, "img");
+                                    formData.append('titulo', $("#tituloVideo").val());
+                                    formData.append('url', $("#urlVideo").val());
+                                    formData.append('sucursal', sucursal);
+                                    formData.append('tipo', "0");
+
+
+                                    $.ajax({
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        method: "POST",
+                                        url: "/upMedia",
+                                        data: formData,
+                                        success: (res) => {
+                                            console.log(res.estado);
+                                            if (res.estado == "true") {
+                                                $("#formGalery").modal('hide');;
+                                                swal("Listo", "Imagen registrado", "success").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            } else {
+                                                $("#formGalery").modal('hide');
+                                                swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            }
+
+                                        },
+                                    });
+
+
+
+                                } else {
+
+
+
+                                    if ($("#tituloVideo").val().length > 0) {
+                                        $('#tituloVideo').addClass('is-valid');
+                                        $('#tituloVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#tituloVideo').addClass('is-invalid')
+                                        return;
+                                    }
+
+
+
+
+                                    if ($('#imgVideo')[0].files.length > 0) {
+
+                                        $('#imgVideo').addClass('is-valid');
+                                        $('#imgVideo').removeClass('is-invalid')
+
+                                    } else {
+                                        $('#imgVideo').addClass('is-invalid')
+                                        return;
+                                    }
+
+
+                                    var formData = new FormData();
+                                    var files = $('#imgVideo')[0].files[0];
+                                    formData.append('file', files, "img");
+                                    formData.append('titulo', $("#tituloVideo").val());
+                                    formData.append('sucursal', sucursal);
+                                    formData.append('tipo', "1");
+
+
+                                    $.ajax({
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        method: "POST",
+                                        url: "/upMedia",
+                                        data: formData,
+                                        success: (res) => {
+                                            console.log(res.estado);
+                                            if (res.estado == "true") {
+                                                $("#formGalery").modal('hide');;
+                                                swal("Listo", "Imagen registrado", "success").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            } else {
+                                                $("#formGalery").modal('hide');
+                                                swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                    location.reload(true);
+                                                });;
+                                            }
+                                            $("#formGalery").modal('hide');
+                                        },
+                                    });
+
+
+                                }
+
+                            }
+                        </script>
+                        <script>
+                            $("input[name='tipoMedia']").change(function () {
+                                if ($("input[name='tipoMedia']:checked").val() == 0) {
+                                    // video
+
+
+                                    $('#dataMedia').html(`
+                <div id="subirMedia" class="form-group">
+
+                    <label for="exampleInputEmail1">Titulo de video</label>
+                                    <input type="text" class="form-control" id="tituloVideo" aria-describedby="titulovideo"
+                                        name="tituloVideo">
+                                        <div id="feedbacktitulo" class="invalid-feedback">
+        Porfavor digita el titulo.
+      </div>
+                                    <label for="exampleInputEmail1">URL Video (YOUTUBE)</label>
+                                    <input type="text" class="form-control" id="urlVideo" aria-describedby="URLVideo"
+                                        name="urlVideo">
+                                        <div id="feedbacktitulo" class="invalid-feedback">
+        Porfavor digita el URL del video.
+      </div>
+                                </div>
+                                <%if(user.tipo==0){ %>
+                                <label for="exampleInputEmail1">Sucursal: </label>
+                                <select id="sucursalMedia" class="form-control form-control-sm">
+                        
+                                    <option value="0">Cuquio</option>
+                                    <option value="1">Tepatitlán de Morelos</option>
+                                    <option value="2">Ameca</option>
+                                    <option value="3">Guadalajara</option>
+                                    <option value="4">Autlán</option>
+                                </select>
+                                <%} %>
+                                <div class="custom-file mt-3">
+                                    <input type="file" accept=".jpg" class="custom-file-input" id="imgVideo"
+                                        name="imgVideo">
+                                        <div id="feedbacktitulo" class="invalid-feedback">
+        Porfavor carga una imagen.
+      </div>
+                                    <label class="custom-file-label" for="customFile">Imagen </label>
+                                </div>
+                                
+
+                `);
+
+
+                                } else {
+
+                                    //imagen
+                                    $('#dataMedia').html(`
+                <div class="form-group">
+
+                    <label for="exampleInputEmail1">Titulo de la imagen</label>
+                                    <input type="text" class="form-control" id="tituloVideo" aria-describedby="titulovideo"
+                                        name="tituloVideo">
+                                        <div id="feedbacktitulo" class="invalid-feedback">
+        Porfavor digita el titulo.
+      </div>
+                                   
+                                </div>
+                                <label for="exampleInputEmail1">Sucursal: </label>
+                                <%if(user.tipo==0){ %>
+                                <label for="exampleInputEmail1">Sucursal: </label>
+                                <select id="sucursalMedia" class="form-control form-control-sm">
+                        
+                                    <option value="0">Cuquio</option>
+                                    <option value="1">Tepatitlán de Morelos</option>
+                                    <option value="2">Ameca</option>
+                                    <option value="3">Guadalajara</option>
+                                    <option value="4">Autlán</option>
+                                </select>
+                                <%} %>
+                                <div class="custom-file mt-3">
+                                    <input type="file" accept=".jpg" class="custom-file-input" id="imgVideo"
+                                        name="imgVideo">
+                                        <div id="feedbacktitulo" class="invalid-feedback">
+        Porfavor carga una imagen.
+      </div>
+                                    <label class="custom-file-label" for="customFile">Imagen </label>
+                                </div>
+                                
+
+                `);
+                                }
+
+                            });
+
+
+                        </script>
+
+                        <script>
+                            $("#selectView").change(function () {
+
+                                if (this.value == 5) {
+                                    var f = 0;
+                                } else {
+                                    var f = 1;
+                                }
+
+                                //INCIO DE LA FUNCION DEL CAMBIO DEL SELECT
+
+
+                                $.ajax({
+                                    method: "POST",
+                                    url: '/getGaleria',
+                                    data: {
+                                        sucursal: this.value,
+                                        nivel: f
+                                    },
+                                    success: function (data) {
+
+                                        $("#latabla").html('');
+
+
+
+                                        $("#latabla").append(
+                                            `
+                             <thead>
+                                 <tr>
+                                     <th scope="col">No.</th>
+                                     <th scope="col">Titulo</th>
+                                     <th scope="col">URL</th>
+                                     <th scope="col">Imagen</th>
+                                     <th scope="col">Sucursal</th>
+                                     <th scope="col"></th>
+                                 </tr>
+                             </thead>
+                             `);
+                                        data.forEach(media => {
+
+                                            var sucursal;
+                                            switch (media.sucursal) {
+                                                case '0':
+
+                                                    sucursal = "Cuquio";
+                                                    break;
+                                                case '1':
+                                                    sucursal = "Tepatitlán de Morelos";
+                                                    break;
+
+                                                case '2':
+                                                    sucursal = "Ameca";
+
+                                                    break;
+
+                                                case '3':
+                                                    sucursal = "Guadalajara";
+
+                                                    break;
+
+                                                case '4':
+                                                    sucursal = "Autlán";
+
+                                                    break;
+
+
+                                            }
+
+                                            if (media.url == null) {
+                                                $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%">  </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+                                            } else {
+                                                $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%"> <a href="${media.url}">${media.url} </a> </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+
+                                            }
+
+                                        });
+
+
+
+
+                                    },
+
+                                });
+
+                                //FIN DE LA FUNCION DE CAMBIO SELECT
+                            });
+
+
+                            $('#multimedia').on('click', () => {
+
+
+                                $.ajax({
+                                    method: "POST",
+                                    url: '/getGaleria',
+                                    data: { sucursal:<% if(user.sucursal != ""){%> <%=user.sucursal %> <%}else {%> 0
+                                        <% } %> ,
+                                            nivel:<%=user.tipo %>},
+                                success: function (data) {
+                                    $("#latabla").html('');
+
+                                    if (<%= user.tipo %>==0){
+
+                                $("#latabla").append(
+                                    `
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Titulo</th>
+                                            <th scope="col">URL</th>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Sucursal</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    `);
+                                data.forEach(media => {
+
+                                    var sucursal;
+                                    switch (media.sucursal) {
+                                        case '0':
+                                            sucursal = "Cuquio";
+                                            break;
+                                        case '1':
+                                            sucursal = "Tepatitlán de Morelos";
+                                            break;
+
+                                        case '2':
+                                            sucursal = "Ameca";
+
+                                            break;
+
+                                        case '3':
+                                            sucursal = "Guadalajara";
+
+                                            break;
+
+                                        case '4':
+                                            sucursal = "Autlán";
+
+                                            break;
+
+
+                                    }
+
+
+
+                                    if (media.url == null) {
+
+
+                                        $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%">  </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+                                    } else {
+                                        console.log("no fue null");
+                                        $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%"> <a href="${media.url}">${media.url} </a> </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+
+                                    }
+                                });
+
+                            }else {
+
+                                $("#latabla").append(
+                                    `
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Titulo</th>
+                                            <th scope="col">URL</th>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    `);
+
+
+
+
+                                data.forEach(media => {
+
+
+
+                                    if (media.url == null) {
+                                        $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%">  </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+                                    } else {
+                                        $("#latabla").append(`
+         
+         
+                             <tr>
+                                 <th style="width:4%" scope="row">-</th>
+                                 <td style="width: 28%">${media.titulo} </td>
+                                 <td style="width: 25%"> <a href="${media.url}">${media.url} </a> </td>
+                                 <td style="width: 10%"><img width="100%" src="${media.img} "> </img></td>
+                                 <td style="width: 28%">${sucursal} </td>
+                                 <td style="width: 5%">
+                                     <button type="button" onclick='deleteMedia(${media.id})' class="btn btn-danger"><i
+                                             class="fas fa-trash"></i></button>
+                                 </td>
+                             </tr>
+         
+         
+                             `);
+
+                                    }
+                                });
+
+
+                            }
+
+                            $("#modalMultimedia").modal('show');//Si estas usando bootstrap
+
+                                    },
+
+                                    });
+
+
+
+                                    });
+
+
+
+                            function modalReponde(id, pregunta, remitente) {
+                                console.log("se entro a esta funcion");
+                                $("#pregunta").val(pregunta);
+                                $('#idpregunta').val(id);
+                                $('#remitente').val(remitente);
+
+
+                                $("#formRes").modal('show');//Si estas usando bootstrap
+
+
+                            }
+
+
+
+                        </script>
+                        <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+                        <script>
+                            var quil = new Quill('#editor', {
+                                theme: "snow"
+                            });
+
+                            function upService() {
+                                console.log(quil.container.firstChild.innerHTML);
+                                if (quil.container.firstChild.innerHTML != "<p><br></p>") {
+
+                                    $('#editor').addClass('is-valid');
+                                    $('#editor').removeClass('is-invalid')
+
+                                } else {
+
+                                    $('#editor').addClass('is-invalid')
+                                    return;
+                                }
+
+                                var formData = new FormData();
+                                let ss = quil.container.firstChild.innerHTML.replace('&nbsp;', ' ');
+                                console.log(ss);
+                                formData.append('service', ss);
+
+
+
+
+                                $.ajax({
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    method: "POST",
+                                    url: "/upService",
+                                    data: formData,
+                                    success: (res) => {
+                                        if (res.estado == "true") {
+                                            $("#formService").modal('hide');;
+                                            swal("Listo", "Servicio registrado", "success").then(() => {
+                                                location.reload(true);
+                                            });;
+                                        } else {
+                                            $("#formService").modal('hide');
+                                            swal("Error", "Ocurrió un error, intente de nuevo.", "error").then(() => {
+                                                location.reload(true);
+                                            });;
+                                        }
+
+                                    },
+                                });
+
+
+                            }
+
+
+
+                        </script>
+
+</body>
+
+</html>

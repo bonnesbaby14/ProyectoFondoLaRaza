@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+
+
+    <link href="css/main.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.png" />
+    <!-- boostrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <link href="css/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+
+
+    <style>
+        section {
+
+
+            display: -ms-flexbox;
+            -ms-flexbox-wrap: wrap;
+            -ms-flexbox-direction: column;
+            -webkit-flex-flow: row wrap;
+            flex-flow: row wrap;
+            display: -webkit-box;
+            display: flex;
+
+        }
+
+        section #dato {
+            -webkit-box-flex: auto;
+            -ms-flex: auto;
+            flex: auto;
+            width: 200px;
+            margin: .5vw;
+        }
+
+        section #dato img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media screen and (max-width: 1000px) {
+            section #dato {
+                margin: 0;
+            }
+
+            section {
+                padding: 0;
+            }
+
+
+.textOverImage{
+    
+}
+        }
+
+
+
+
+        a {
+            text-decoration: none;
+        }
+
+        .textOverImage {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            float: left;
+            margin: 4px;
+            background-size: 100%;
+            background-position: center;
+            transition: 0.5s;
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 0 4px #000;
+        }
+
+        .textOverImage:hover {
+            background-size: 110%;
+        }
+
+        .textOverImage:before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(90%);
+            /*use transform:translateY(100%); to remove footer*/
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            padding: 0 8px;
+            content: attr(data-title);
+            transition: 0.5s 0.1s;
+            color: #fff;
+            font-weight: bold;
+            font-size: .9rem;
+        }
+
+        .textOverImage:after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #fff;
+            padding: 8px;
+            content: attr(data-text);
+            transition: 0.5s;
+            padding-top: 2em;
+            margin-top: 8px;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        .textOverImage:hover:after {
+            transform: translateY(0);
+            transition: 0.5s 0.1s;
+            opacity: 1;
+        }
+
+        .textOverImage:hover:before {
+            transform: translateY(0);
+            padding: 8px;
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <!-- barra de navegacion -->
+    <nav class="navbar navbar-expand-lg navbar-dark navcolor fixed-top "
+        style="position: sticky !important;background-color: #fc9c42 !important;">
+        <div class="titletext">
+            <a class="navbar-brand texttitle" href="/">
+                <img src="/img/logo.png" width="60" height="60" class="d-inline-block align-top logoimg"
+                    alt="FONDO DE ASEGURAMIENTO AGRICOLA Y GANADERO LA RAZA logo" loading="lazy" id="logoi">
+                <div class="logotitle" id="logot">
+                    FONDO DE ASEGURAMIENTO
+                    <br>
+                    AGRICOLA Y GANADERO LA RAZA
+                </div>
+            </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="btnmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/#header" id="idInicio">Inicio</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#Nosotros" id="idNosotros">Nosotros</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/#Galeria" id="idGaleria">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/#Noticias" id="idNoticias">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/#Blog" id="idBlog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="/#Servicios" id="idServicios">Servicios</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <section class="container-fluid" style="background: black;">
+        <% for(let x=0; x<multimedia.length; x++){ %>
+
+
+
+            <div class="modal fade" id="modal<%=multimedia[x].id %>" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-body mb-0 p-0">
+
+                            <% if(multimedia[x].tipo==0){ %>
+
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/<%=multimedia[x].url.substring(multimedia[x].url.indexOf("=")+1,multimedia[x].url.length)  %> "
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                            <% }else{ %>
+                            <img width="100%" height="100%" src="<%=multimedia[x].img%>"></img>
+                            <% } %>
+
+
+
+
+                        </div>
+
+                        <div class="modal-footer justify-content-center">
+                            <span class="mr-4" style="color:black;"><%=multimedia[x].titulo  %>
+                            </span>
+                            <button type="button" class="btn btn-dark btn-rounded btn-md ml-4"
+                                data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+
+        <div id="dato"> <a data-toggle="modal"
+            data-target="#modal<%=multimedia[x].id%>" class="textOverImage" style="background-image:url(<%=multimedia[x].img %>)"
+                data-title="<%=multimedia[x].titulo %>" data-text="<%=multimedia[x].titulo%>">
+            </a> </div>
+
+
+
+
+
+
+
+        <% } %>
+    </section>
+
+    <footer class="container-fluid" style="background-color: #4277fc !important; color: white;">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-12 py-5">
+                    <div class="mb-5 flex-center">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+        <!-- Footer Elements -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 Copyright: FONDO DE ASEGURAMIENTO
+            AGRICOLA Y GANADERO LA RAZA
+
+
+
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="css/vendor/jquery/jquery.min.js"></script>
+    <script src="css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>//animaciones
+
+
+
+//control del nav bar
+
+
+
+
+    </script>
+
+</body>
+
+</html>
